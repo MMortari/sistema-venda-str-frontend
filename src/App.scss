@@ -1,0 +1,17 @@
+.full {
+  display: flex;
+  flex-direction: row;
+
+  aside {
+    background: pink;
+    width: 220px;
+    height: 100vh;
+  }
+  
+  main {
+    background: yellow;
+    height: 100vh;
+    width: calc(100% - 220px);
+  }
+
+}
