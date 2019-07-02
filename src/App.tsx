@@ -1,20 +1,29 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import './../node_modules/jquery/dist/jquery.min.js';
+import './../node_modules/bootstrap/scss/bootstrap.scss';
 import './App.scss';
 
+import Header from './components/Header';
 import Menu from './components/Menu';
+import DashboardMain from './pages/DashboardMain';
 
 class App extends Component {
   
   render() {
     return (
-      <div className="full">
-        <aside>
-          <Menu />
-        </aside>
-        <main>
-
-        </main>
-      </div>
+      <BrowserRouter>
+        <div className="full">
+          <Header />
+          <div className="content">
+            <Menu />
+            <main>
+              <Route exact path="/" component={DashboardMain} />
+            </main>
+          </div>
+        </div>
+      </BrowserRouter>
     );
   }
 

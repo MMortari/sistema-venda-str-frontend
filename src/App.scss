@@ -1,17 +1,31 @@
+
+$header-height: 50px;
+$width-menu: 180px;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .full {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
-  aside {
-    background: pink;
-    width: 220px;
-    height: 100vh;
+  #{Header} {
+    height: $header-height;
   }
   
-  main {
-    background: yellow;
-    height: 100vh;
-    width: calc(100% - 220px);
+  .content {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - #{$header-height});
+    
+    main {
+      background: #fff;
+      width: calc(100% - #{$width-menu});
+      padding: 15px;
+    }
   }
 
 }
