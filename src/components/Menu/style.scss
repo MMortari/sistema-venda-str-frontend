@@ -10,14 +10,22 @@ aside {
     margin: 0;
 
     li {
+      &:first-child {
+        padding: 18px;
+        text-align: center;
+      }
+
       span {
         color: #bbbbbb;
-        
+        letter-spacing: 1.1px;
+        text-transform: uppercase;
+        margin-left: 14px;
       }
       
       a {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         padding: 10px 11px;
         // border-bottom: 1px solid #ccc;
         border-left: 3px solid transparent;
@@ -28,6 +36,10 @@ aside {
           text-decoration: none;
           border-left: 3px solid #585858;
           background: #d6d6d6;
+        }
+
+        i {
+          font-size: 13px;
         }
 
         .selected {

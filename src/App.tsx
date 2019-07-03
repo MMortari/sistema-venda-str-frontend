@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import './../node_modules/jquery/dist/jquery.min.js';
 import './../node_modules/bootstrap/scss/bootstrap.scss';
+import './../node_modules/font-awesome/css/font-awesome.css';
 import './App.scss';
 
 import Header from './components/Header';

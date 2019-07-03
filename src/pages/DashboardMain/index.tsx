@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import './style.scss';
 
+import Head from './../../components/Head';
+
 class DashboardMain extends Component {
 
   componentDidMount() {
@@ -11,7 +13,7 @@ class DashboardMain extends Component {
   render() {
     return (
       <div className="container">
-        <h1>Dashboard</h1>
+        <Head title="Dashboard" breadcrumb={["Dashboard"]} />
 
         <div className="row">
 
