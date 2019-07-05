@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import { Form as Unform, Select } from '@rocketseat/unform'; 
 import _ from 'lodash';
 
@@ -9,6 +9,7 @@ import { ProdutosInterface } from './../../../interfaces/api';
 import api from './../../../services/api';
 // Components
 import Head from './../../../components/Head';
+import DinheiroMask from './../../../components/DinheiroMask';
 // Style
 import './style.scss';
 
@@ -38,7 +39,9 @@ class VendasNova extends Component {
 
   state = {
     produtos: [],
-    totalProdutos: [{ id: null, total: 0 }]
+    totalProdutos: [{ id: null, qtde: 0, total: 0 }],
+    total: { qtde: 0, valor: 0 },
+    loading: true,
   }
 
   async componentDidMount() {
@@ -47,31 +50,46 @@ class VendasNova extends Component {
     
     let totalProdutos: any[] = [];
 
-    dados.map(data => totalProdutos.push({ id: data.id, total: 0 }))
+    dados.map(data => totalProdutos.push({ id: data.id, qtde: 0, total: 0 }))
 
-    this.setState({ produtos: dados, totalProdutos });
+    this.setState({ produtos: dados, totalProdutos, loading: false });
+
+    console.log("Initial State -> ", this.state)
   }
 
   handleFormSubmit = (data: any) => {
     console.log("Enviar formulário -> ", data)
   }
 
-  handleTotalPorProduto = (id: number) => {
-    let index = _.findIndex(this.state.produtos, ['id', id]);
+  handleTotalPorProduto = (e: any, id: number, valor: number) => {
 
-    let produtos = this.state.produtos;
-    // produtos[index].total = 2 * produtos[index].preco;
- 
-    this.setState({ produtos });
+    let index = _.findIndex(this.state.totalProdutos, ['id', id]);
+    
+    let produtos = [ ...this.state.totalProdutos ];
+    let total = { qtde: 0, valor: 0, };
+    const qtde: number = parseInt(e.target.value);
+    
+    produtos[index].total = qtde * valor;
+    produtos[index].qtde = qtde;
 
-    console.log("Total por Produtos -> ", id);
-    console.log("Produto -> ", produtos );
+    produtos.map(data => {
+      total.qtde += data.qtde;
+      total.valor += data.total;
+    })
+    
+    this.setState({ totalProdutos: produtos, total });
+    
+    // console.log("State totalProdutos -> ", this.state.totalProdutos);
+    // console.log("totalProdutos -> ", this.state);
+    // console.log("-------------------------------------------");
   }
 
   render() {
     return (
       <Fragment>
         <Head title="Nova Venda" breadcrumb={['Venda', 'Nova Venda']} />
+
+        { this.state.loading && (<i className="fa fa-spinner fa-spin"></i>) }
 
         <Unform onSubmit={() => this.handleFormSubmit}>
           <Row>
@@ -81,38 +99,51 @@ class VendasNova extends Component {
                 <Select className="form-control" name="produtos" options={this.state.produtos} placeholder="Selecione um vendedor" />
               </Form.Group>
             </Col>
-            <Col md={6}>
+            <Col md={5}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Comanda</Form.Label>
                 <Select className="form-control" name="produtos" options={this.state.produtos} placeholder="Selecione um vendedor" />
               </Form.Group>
+            </Col>
+            <Col md={1}>
+              <button className="btn btn-dark"><i className="fa fa-plus-circle"></i></button>
             </Col>
             <Col md={12}>
               <table className="table">
                 <thead>
                   <tr>
                     <td>Produto</td> 
-                    <td>Preço</td>
-                    <td>Qtde</td>
-                    <td>Total</td>
+                    <td className="text-center">Preço</td>
+                    <td className="text-center">Qtde</td>
+                    <td className="text-center">Total</td>
                   </tr>
                 </thead>
                 <tbody>
                   {
-                    this.state.produtos.map((data: ProdutosInterface) => (
+                    this.state.produtos.map((data: ProdutosInterface, index) => (
                       <tr key={data.id}>
                         <td>{data.nome}</td>
-                        <td>{data.preco}</td>
-                        <td><Select className="form-control selectSize" name="produtos" onChange={() => this.handleTotalPorProduto(data.id)} options={valores} /></td>
-                        <td>Total</td>
+                        <td className="text-center"><DinheiroMask>{data.preco}</DinheiroMask></td>
+                        <td className="text-center"><Select className="form-control selectSize" name={`produto-${data.id}`} onChange={(e: any) => this.handleTotalPorProduto(e, data.id, data.preco)} options={valores} /></td>
+                        <td className="text-right"><DinheiroMask>{ this.state.totalProdutos[index].total }</DinheiroMask></td>
                       </tr>
                     ))
                   }
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td className="text-right font-bold">Total</td>
+                    <td className="text-center">{this.state.total.qtde}</td>
+                    <td className="text-right"><DinheiroMask>{this.state.total.valor}</DinheiroMask></td>
+                  </tr>
+                </tfoot>
               </table>
             </Col>
-            <Col md={12}>
-              <Button className="w-100" variant="dark" type="submit"><i className="fa fa-plus-circle"></i></Button>
+            <Col md={6} sm={0}>
+            </Col>
+            <Col md={6} sm={12}>
+              <button className="btn btn-dark w-100" type="submit"><i className="fa fa-plus-circle"></i></button>
             </Col>
           </Row>
         </Unform>

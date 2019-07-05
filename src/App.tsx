@@ -14,6 +14,7 @@ import Menu from './components/Menu';
 import DashboardMain from './pages/dashboard/DashboardMain';
 import Vendas from './pages/vendas/Vendas';
 import VendasNova from './pages/vendas/VendasNova';
+import Produtos from './pages/produtos/Produtos';
 
 class App extends Component {
   
@@ -29,6 +30,7 @@ class App extends Component {
                 <Route path="/" exact component={DashboardMain} />
                 <Route path="/vendas" exact component={Vendas} />
                 <Route path="/vendas/nova" exact component={VendasNova} />
+                <Route path="/produtos" exact component={Produtos} />
               </div>
             </main>
           </div>

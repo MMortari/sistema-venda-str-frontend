@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './style.scss';
 
-const Menu = (props: any) => (
+const Menu = () => (
   <aside>
     <ul>
       {/* <li><Link to="">Link <FontAwesomeIcon icon="coffee" /></Link></li> */}
