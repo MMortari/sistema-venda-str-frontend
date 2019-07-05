@@ -26,6 +26,7 @@ $width-menu: 180px;
       background: #fff;
       width: calc(100% - #{$width-menu});
       padding: 15px;
+      overflow: auto;
     }
   }
 

@@ -14,7 +14,7 @@ const Head = ({ title, breadcrumb }: HeadInterface) => (
       <div className="breadcrumbList">
         <ul>
           {breadcrumb.map((data, index) => (
-            <Fragment>
+            <Fragment key={index}>
               <li>{data}</li>
               {index + 1 < breadcrumb.length && (<span><i className="fa fa-chevron-right"></i></span>)}
             </Fragment>

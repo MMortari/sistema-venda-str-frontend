@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import './style.scss';
 
-import Head from './../../components/Head';
+import Head from '../../../components/Head';
 
 class DashboardMain extends Component {
 
@@ -12,7 +12,7 @@ class DashboardMain extends Component {
 
   render() {
     return (
-      <div className="container">
+      <Fragment>
         <Head title="Dashboard" breadcrumb={["Dashboard"]} />
 
         <div className="row">
@@ -48,7 +48,7 @@ class DashboardMain extends Component {
           </div>
 
         </div>
-      </div>
+      </Fragment>
     )
   }
 

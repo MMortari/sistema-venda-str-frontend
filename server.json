@@ -1,0 +1,49 @@
+{
+   "produtos": [
+      {
+         "id": 1,
+         "preco": 6,
+         "nome": "Espetinho"
+      },
+      {
+         "id": 2,
+         "preco": 7,
+         "nome": "Caldo"
+      },
+      {
+         "id": 3,
+         "preco": 10,
+         "nome": "Galinhada"
+      },
+      {
+         "id": 4,
+         "preco": 7,
+         "nome": "Espeto Chocolate"
+      },
+      {
+         "id": 5,
+         "preco": 2.5,
+         "nome": "Refrigerante"
+      }
+   ],
+   "vendas": [
+      {
+         "id": 1,
+         "produtosId": [ 1, 2 ],
+         "total": 265.9,
+         "created_at": "06/04/2019T09:16:32"
+      },
+      {
+         "id": 2,
+         "produtosId": [ 2 ],
+         "total": 20.9,
+         "created_at": "06/04/2019T09:16:32"
+      },
+      {
+         "id": 3,
+         "produtosId": [ 1, 4 ],
+         "total": 265.9,
+         "created_at": "06/04/2019T09:16:32"
+      }
+   ]
+}

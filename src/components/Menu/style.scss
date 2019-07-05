@@ -3,6 +3,7 @@ aside {
   width: 180px;
   z-index: 10;
   box-shadow: 2px 2px 15px #dedede;
+  overflow: auto;
 
   ul {
     list-style: none;
@@ -38,13 +39,17 @@ aside {
           background: #d6d6d6;
         }
 
+        
         i {
-          font-size: 13px;
+          font-size: 13px !important;
         }
-
-        .selected {
-
-        }
+        
+      }
+      .selected {
+        border-left: 3px solid #585858 !important;
+      }
+      .addNew:hover {
+        border-left: 1px solid transparent;
       }
     }
   }
